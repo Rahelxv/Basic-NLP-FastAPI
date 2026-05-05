@@ -1,0 +1,18 @@
+# Folder dependensi Node.js
+Client/node_modules/
+Client/dist/
+
+# Folder Virtual Environment Python
+Backend/venv/
+Backend/.venv/
+Backend/__pycache__/
+*.pyc
+
+# Environment variables (Sangat penting jika nanti ada API Key)
+.env
+Backend/.env
+Client/.env
+
+# File sistem lainnya
+.DS_Store
+Thumbs.db
