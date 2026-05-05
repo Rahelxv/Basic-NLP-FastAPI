@@ -1,6 +1,6 @@
 export default function Upload() {
   //kirim file csv ke belakang
-
+  const handelFile = () => {};
   return (
     <div className="flex flex-col items-center pt-20 h-screen gap-22">
       {/* title and logo */}
