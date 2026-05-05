@@ -1,6 +1,26 @@
 export default function Upload() {
   //kirim file csv ke belakang
-  const handelFile = () => {};
+  const handelFile = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log([...formData.entries()]);
+    try {
+      const response = await fetch("http://127.0.0.1:8000/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
   return (
     <div className="flex flex-col items-center pt-20 h-screen gap-22">
       {/* title and logo */}
@@ -41,14 +61,15 @@ export default function Upload() {
             Upload
           </span>
         </div>
-
-        <input
-          onSubmit={handelFile}
-          type="file"
-          className="hidden"
-          id="filesub"
-          accept=".csv, .xlsx"
-        />
+        <form>
+          <input
+            onChange={handelFile}
+            type="file"
+            className="hidden"
+            id="filesub"
+            accept=".csv, .xlsx"
+          />
+        </form>
       </label>
     </div>
   );
