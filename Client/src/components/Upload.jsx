@@ -6,7 +6,6 @@ export default function Upload() {
     if (!file) return;
     const formData = new FormData();
     formData.append("file", file);
-    console.log([...formData.entries()]);
     try {
       const response = await fetch("http://127.0.0.1:8000/upload", {
         method: "POST",
@@ -15,7 +14,9 @@ export default function Upload() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
+        if (result && Object.keys(result).length > 0) {
+          console.log("Data berhasil diterima:", result);
+        }
       }
     } catch (error) {
       console.error(error.message);

@@ -2,7 +2,11 @@ from fastapi import FastAPI, Response, status, HTTPException, File, UploadFile, 
 from fastapi.params import Body
 from pydantic import BaseModel
 import time
+from typing import Annotated 
 from fastapi.middleware.cors import CORSMiddleware
+#importing tools
+from app.Services.N_gram import NLP_basic_ngram
+
 
 app = FastAPI()
 
@@ -25,9 +29,39 @@ def root():
     return {"message": "bellow World"}
 
 #recive data from frontend
+ALLOWED_MIME_TYPES = [
+    "text/csv",                                                         # Untuk .csv
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", # Untuk .xlsx
+    "application/vnd.ms-excel"                                          # Untuk .xls (opsional)
+]
+
+
 @app.post("/upload")
-def taking_upload(file: UploadFile = File(...)):
-    return{
-        "filename" : file.filename,
-        "content_type": file.content_type
+async def taking_upload(file: Annotated[UploadFile, File()]):
+    #batasi ukuran file (5mb max)
+    MAX_FILE_SIZE = 5 * 1024 * 1024 
+    if file.size > MAX_FILE_SIZE:
+        raise HTTPException(status_code=status.HTTP_413_CONTENT_TOO_LARGE, detail="FILE IS TOO LARGE")
+    #batasi file type
+    if file.content_type not in ALLOWED_MIME_TYPES:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported file!")
+
+    #baca isi file
+    content = await file.read()
+
+    #masukan file dari client ke tools n-gram dulu
+    try:
+        stats, ngrams = NLP_basic_ngram(content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing CSV: {str(e)}")
+
+    return {
+        "filename": file.filename,
+        "content_type": file.content_type,
+        "statistics": stats,
+        "ngrams": {
+            "unigrams": ngrams[0],
+            "bigrams": ngrams[1],
+            "trigrams": ngrams[2]
+        }
     }
