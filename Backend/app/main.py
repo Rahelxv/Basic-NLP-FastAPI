@@ -46,7 +46,7 @@ async def taking_upload(file: Annotated[UploadFile, File()]):
     if file.content_type not in ALLOWED_MIME_TYPES:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported file!")
 
-    #baca isi file
+    #baca isi file// metode untuk membaca file menjadikan dia bytes 1010 etc
     content = await file.read()
 
     #masukan file dari client ke tools n-gram dulu
@@ -58,6 +58,7 @@ async def taking_upload(file: Annotated[UploadFile, File()]):
     return {
         "filename": file.filename,
         "content_type": file.content_type,
+        "file_size" : f"{(file.size / 1024 / 1024):.2f} MB",
         "statistics": stats,
         "ngrams": {
             "unigrams": ngrams[0],
