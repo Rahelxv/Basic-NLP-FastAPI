@@ -123,7 +123,7 @@ function App() {
                 <li className="flex items-start gap-3 text-xs text-slate-300">
                   <span className="text-blue-500 mt-1">✔</span>
                   <span>
-                    File limits: Maximum <strong>5MB</strong> and must be in{" "}
+                    File limits: Maximum <strong>100MB</strong> and must be in{" "}
                     <strong>.CSV</strong> format.
                   </span>
                 </li>

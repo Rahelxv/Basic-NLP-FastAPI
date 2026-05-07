@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, File, UploadFile, Form
 from fastapi.params import Body
 from pydantic import BaseModel
-import time
 from typing import Annotated 
 from fastapi.middleware.cors import CORSMiddleware
 #importing tools
@@ -27,6 +26,7 @@ def root():
     return {"message": "bellow World"}
 
 #recive data from frontend
+####change this if you want other file type####
 ALLOWED_MIME_TYPES = [
     "text/csv",                                                         # Untuk .csv
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", # Untuk .xlsx
@@ -36,8 +36,9 @@ ALLOWED_MIME_TYPES = [
 
 @app.post("/upload")
 async def taking_upload(file: Annotated[UploadFile, File()]):
-    #batasi ukuran file (5mb max)
-    MAX_FILE_SIZE = 5 * 1024 * 1024 
+    #batasi ukuran file (100mb max) 
+    ####change this if you want bigger file size####
+    MAX_FILE_SIZE = 1 * 1024 * 1024 * 100 
     if file.size > MAX_FILE_SIZE:
         raise HTTPException(status_code=status.HTTP_413_CONTENT_TOO_LARGE, detail="FILE IS TOO LARGE")
     #batasi file type
