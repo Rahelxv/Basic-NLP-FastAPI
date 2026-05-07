@@ -269,7 +269,7 @@ export default function Statistics({ goBackToUpload, parsingData }) {
             </div>
           </div>
 
-          {/* TOP 10 POSITIVE REVIEWS */}
+          {/* TOP POSITIVE REVIEWS */}
           <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg">
             <div className="flex items-center gap-2 mb-5 pb-4 border-b border-white/20">
               <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center border border-green-500/30">
@@ -298,7 +298,7 @@ export default function Statistics({ goBackToUpload, parsingData }) {
                     className="p-4 bg-green-500/10 rounded-xl border border-green-500/20"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="w-6 h-6 bg-green-500 text-white rounded-md flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5 shadow-sm">
+                      <span className="w-6 h-6 bg-green-500 text-white rounded-md flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-sm">
                         {i + 1}
                       </span>
                       <p className="text-sm text-slate-300 leading-relaxed">
@@ -310,7 +310,7 @@ export default function Statistics({ goBackToUpload, parsingData }) {
             </div>
           </div>
 
-          {/* TOP 10 NEGATIVE REVIEWS */}
+          {/* TOP NEGATIVE REVIEWS */}
           <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg">
             <div className="flex items-center gap-2 mb-5 pb-4 border-b border-white/20">
               <div className="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center border border-red-500/30">
@@ -339,7 +339,7 @@ export default function Statistics({ goBackToUpload, parsingData }) {
                     className="p-4 bg-red-500/10 rounded-xl border border-red-500/20"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="w-6 h-6 bg-red-500 text-white rounded-md flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5 shadow-sm">
+                      <span className="w-6 h-6 bg-red-500 text-white rounded-md flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-sm">
                         {i + 1}
                       </span>
                       <p className="text-sm text-slate-300 leading-relaxed">
