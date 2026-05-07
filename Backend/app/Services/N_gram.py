@@ -107,8 +107,10 @@ def NLP_basic_ngram(data):
         # Tambahkan .head(10) untuk mengambil 10 besar saja
         counts = pd.Series(nltk.ngrams(tokens_clean, n)).value_counts().head(10)
         
-        # Proses konversi ke dictionary tetap sama
-        as_dict = { " ".join(k): int(v) for k, v in counts.items() }
-        ngrams_result.append(as_dict)
+        as_list = [
+        {"text": " ".join(k), "count": int(v)} 
+        for k, v in counts.items()
+    ]
+        ngrams_result.append(as_list)
             
     return stats, ngrams_result

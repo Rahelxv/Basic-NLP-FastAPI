@@ -6,7 +6,8 @@ from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 #importing tools
 from app.Services.N_gram import NLP_basic_ngram
-
+from app.Services.word_spacy import Spacy_analysis
+from app.Services.Sentiment import get_sentiment_insights
 
 app = FastAPI()
 
@@ -52,6 +53,8 @@ async def taking_upload(file: Annotated[UploadFile, File()]):
     #masukan file dari client ke tools n-gram dulu
     try:
         stats, ngrams = NLP_basic_ngram(content)
+        nouns, verbs, adj, people, places = Spacy_analysis(content)
+        sentiment_result = get_sentiment_insights(content)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing CSV: {str(e)}")
 
@@ -64,5 +67,17 @@ async def taking_upload(file: Annotated[UploadFile, File()]):
             "unigrams": ngrams[0],
             "bigrams": ngrams[1],
             "trigrams": ngrams[2]
+        },
+        "spacy":{
+            "top_nouns": nouns.to_dict(orient="records"),
+            "top_verbs": verbs.to_dict(orient="records"),
+            "top_adjectives": adj.to_dict(orient="records"),
+            "top_people": people.to_dict(orient="records"),
+            "top_places": places.to_dict(orient="records")
+        },
+        "sentiment_analysis": {
+            "summary": sentiment_result["summary"],       # Untuk Pie & Bar Chart
+            "keywords": sentiment_result["keywords"],     # Untuk Insight kata kunci
+            "extremes": sentiment_result["extremes"]      # Untuk contoh review nyata
         }
     }
