@@ -11,10 +11,7 @@ from app.Services.Sentiment import get_sentiment_insights
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:8000",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,

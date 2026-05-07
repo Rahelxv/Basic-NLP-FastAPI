@@ -8,7 +8,7 @@ from nltk.stem import WordNetLemmatizer
 import io
 from collections import Counter
 
-nltk.download('stopwords')
+""" nltk.download('stopwords') """
 ##vader definition
 vader_analyzer = SentimentIntensityAnalyzer()
 english_stopwords = set(stopwords.words('english'))

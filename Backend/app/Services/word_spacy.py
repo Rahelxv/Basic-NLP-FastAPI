@@ -10,10 +10,10 @@ import io
 
 ###Function needed###
 # Download resources yang diperlukan
-nltk.download('stopwords')
+""" nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('punkt_tab')
-nltk.download('wordnet')
+nltk.download('wordnet') """
 
 
 

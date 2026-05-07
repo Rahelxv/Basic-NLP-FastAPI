@@ -7,11 +7,11 @@ from nltk.corpus import stopwords
 import io
 
 # Download resources yang diperlukan
-nltk.download('stopwords')
+""" nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('wordnet')
-
+ """
 
 
 
