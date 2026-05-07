@@ -43,12 +43,12 @@ function App() {
           setData(result);
         } else {
           alert(
-            "Gagal memproses file. Pastikan format CSV dan ukuran maksimal 5MB.",
+            "Gagal memproses file. Pastikan format CSV dan ukuran maksimal 100MB.",
           );
         }
       } else {
         alert(
-          "Gagal memproses file. Pastikan format CSV dan ukuran maksimal 5MB.",
+          "Gagal memproses file. Pastikan format CSV dan ukuran maksimal 100MB.",
         );
       }
     } catch (error) {
